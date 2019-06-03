@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgraphs_tutor.a  CMakeFiles/graphs_tutor.dir/graphs_1.cpp.o
+/usr/bin/ranlib libgraphs_tutor.a

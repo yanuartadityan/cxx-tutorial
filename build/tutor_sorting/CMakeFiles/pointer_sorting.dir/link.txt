@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpointer_sorting.a  CMakeFiles/pointer_sorting.dir/merge_sort.cpp.o CMakeFiles/pointer_sorting.dir/quick_sort.cpp.o
+/usr/bin/ranlib libpointer_sorting.a

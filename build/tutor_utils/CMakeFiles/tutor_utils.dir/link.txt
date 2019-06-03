@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtutor_utils.a  CMakeFiles/tutor_utils.dir/tutor_utils.cpp.o
+/usr/bin/ranlib libtutor_utils.a

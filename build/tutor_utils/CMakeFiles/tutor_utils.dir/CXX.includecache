@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mirkwood/Workspace/HPC/tutor_utils/tutor_utils.cpp
+iostream
+-
+random
+-
+tutor_utils.h
+/home/mirkwood/Workspace/HPC/tutor_utils/tutor_utils.h
+
+/home/mirkwood/Workspace/HPC/tutor_utils/tutor_utils.h
+

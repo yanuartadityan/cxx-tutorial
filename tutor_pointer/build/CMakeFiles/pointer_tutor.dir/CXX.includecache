@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mirkwood/Workspace/HPC/tutor_pointer/training.cpp
+training.h
+/home/mirkwood/Workspace/HPC/tutor_pointer/training.h
+
+/home/mirkwood/Workspace/HPC/tutor_pointer/training.h
+

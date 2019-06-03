@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mirkwood/Workspace/HPC/tutor_graphs/graphs_1.h
+iostream
+-
+
+/home/mirkwood/Workspace/HPC/tutor_graphs/test_graphs_1.cpp
+iostream
+-
+graphs_1.h
+/home/mirkwood/Workspace/HPC/tutor_graphs/graphs_1.h
+

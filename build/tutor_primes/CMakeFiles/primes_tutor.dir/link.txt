@@ -1,0 +1,2 @@
+/usr/bin/ar qc libprimes_tutor.a  CMakeFiles/primes_tutor.dir/primes_1.cpp.o
+/usr/bin/ranlib libprimes_tutor.a

@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mirkwood/Workspace/HPC/tutor_primes/primes_1.cpp
+iostream
+-
+vector
+-
+primes_1.h
+/home/mirkwood/Workspace/HPC/tutor_primes/primes_1.h
+
+/home/mirkwood/Workspace/HPC/tutor_primes/primes_1.h
+vector
+-
+

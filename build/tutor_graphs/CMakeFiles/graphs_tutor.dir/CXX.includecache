@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mirkwood/Workspace/HPC/tutor_graphs/graphs_1.cpp
+iostream
+-
+queue
+-
+graphs_1.h
+/home/mirkwood/Workspace/HPC/tutor_graphs/graphs_1.h
+
+/home/mirkwood/Workspace/HPC/tutor_graphs/graphs_1.h
+iostream
+-
+
