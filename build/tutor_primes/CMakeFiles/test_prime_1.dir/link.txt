@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/test_prime_1.dir/test_primes_1.cpp.o  -o test_prime_1 libprimes_tutor.a 

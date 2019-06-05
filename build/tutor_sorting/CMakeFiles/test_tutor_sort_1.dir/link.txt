@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/test_tutor_sort_1.dir/test_tutor_sort_1.cpp.o  -o test_tutor_sort_1 libpointer_sorting.a ../tutor_utils/libtutor_utils.a 

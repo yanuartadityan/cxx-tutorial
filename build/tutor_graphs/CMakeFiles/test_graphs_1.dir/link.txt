@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/test_graphs_1.dir/test_graphs_1.cpp.o  -o test_graphs_1 libgraphs_tutor.a 

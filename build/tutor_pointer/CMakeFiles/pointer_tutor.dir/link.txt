@@ -1,2 +1,0 @@
-/usr/bin/ar qc libpointer_tutor.a  CMakeFiles/pointer_tutor.dir/training.cpp.o
-/usr/bin/ranlib libpointer_tutor.a

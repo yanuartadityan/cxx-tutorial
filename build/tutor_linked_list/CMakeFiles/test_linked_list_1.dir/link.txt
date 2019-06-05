@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/test_linked_list_1.dir/test_linked_list_1.cpp.o  -o test_linked_list_1 liblinked_list_tutor.a 
