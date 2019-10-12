@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.0)
 # project name
 project(tutor_pointer)
 
+# add compiler flags
+set(CMAKE_CXX_FLAGS "-std=c++11")
+
 # add subdirectory here
 # e.g. add_subdirectory(src)
 

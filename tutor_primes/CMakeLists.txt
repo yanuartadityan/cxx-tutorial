@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 3.0)
 # project name
 project(tutor_primes)
 
+# set C++ compiler flags
+set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS_DEBUG "-std=c++11")
+
 # all srcs
 set(prime_files
     primes_1.cpp)
