@@ -1,0 +1,4 @@
+/home/mirkwood/Workspace/HPC/tutor_pointer/build/CMakeFiles/rebuild_cache.dir
+/home/mirkwood/Workspace/HPC/tutor_pointer/build/CMakeFiles/edit_cache.dir
+/home/mirkwood/Workspace/HPC/tutor_pointer/build/CMakeFiles/pointer_tutor.dir
+/home/mirkwood/Workspace/HPC/tutor_pointer/build/CMakeFiles/test_1.dir
