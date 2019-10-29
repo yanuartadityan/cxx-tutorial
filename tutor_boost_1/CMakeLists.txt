@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.0)
 # project name
 project(tutor_boost_1)
 
+# add compiler flags
+set(CMAKE_CXX_FLAGS "-std=c++11")
+
 # all srcs
 set(boost_files_1
     boost_1.cpp)
