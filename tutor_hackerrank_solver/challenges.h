@@ -7,5 +7,6 @@
 
 void pair_sock(void);
 void counting_valleys(void);
+void cloud_jumping(void);
 
 #endif //CXX_TUTOR_CHALLENGES_H

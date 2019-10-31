@@ -7,6 +7,7 @@
 #include <vector>
 #include <limits>
 #include <algorithm>
+#include <cstring>
 
 using namespace std;
 
@@ -30,9 +31,30 @@ void counting_valleys(void) {
 }
 
 int countValleys(int n, string s){
-    cout << n << endl;
-    cout << s << endl;
 
-    int output;
-    return output = 0;
+    // n = number of steps
+    // s = steps
+    int valleyCount = 0;
+    int hillCount = 0;
+
+    // start at sea level
+    int level = 0;
+
+    for (char c : s){
+        if (c =='U'){
+            if (level == -1){
+                valleyCount++;
+            }
+            level++;
+        }
+        // if going downhill
+        else{
+            if (level == 1){
+                hillCount++;
+            }
+            level--;
+        }
+    }
+
+    return valleyCount;
 }

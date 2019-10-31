@@ -10,7 +10,8 @@ using namespace std;
 int main(int argc, char* argv[]){
 
 //    pair_sock();
-    counting_valleys();
+//    counting_valleys();
+    cloud_jumping();
 
     return 0;
 }
