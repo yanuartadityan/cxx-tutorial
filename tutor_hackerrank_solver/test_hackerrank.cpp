@@ -9,7 +9,8 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 
-    pair_sock();
+//    pair_sock();
+    counting_valleys();
 
     return 0;
 }

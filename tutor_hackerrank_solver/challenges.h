@@ -6,5 +6,6 @@
 #define CXX_TUTOR_CHALLENGES_H
 
 void pair_sock(void);
+void counting_valleys(void);
 
 #endif //CXX_TUTOR_CHALLENGES_H
