@@ -11,7 +11,9 @@ int main(int argc, char* argv[]){
 
 //    pair_sock();
 //    counting_valleys();
-    cloud_jumping();
+//    cloud_jumping();
+//    repeated_string();
+    hourglass();
 
     return 0;
 }

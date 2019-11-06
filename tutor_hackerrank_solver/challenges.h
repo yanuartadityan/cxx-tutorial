@@ -8,5 +8,7 @@
 void pair_sock(void);
 void counting_valleys(void);
 void cloud_jumping(void);
+void repeated_string(void);
+void hourglass(void);
 
 #endif //CXX_TUTOR_CHALLENGES_H

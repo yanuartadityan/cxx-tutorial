@@ -7,7 +7,9 @@ set(CMAKE_CXX_FLAGS "-std=c++11")
 set(solver_lib_files
         pair_sock.cpp
         counting_valleys.cpp
-        cloud_jumping.cpp)
+        cloud_jumping.cpp
+        repeated_string.cpp
+        hourglass.cpp hourglass.cpp)
 
 add_library(hackerrank_solver STATIC ${solver_lib_files})
 
