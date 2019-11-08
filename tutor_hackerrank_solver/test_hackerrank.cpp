@@ -13,7 +13,9 @@ int main(int argc, char* argv[]){
 //    counting_valleys();
 //    cloud_jumping();
 //    repeated_string();
-    hourglass();
+//    hourglass();
+//    left_rotation();
+    new_year_chaos();
 
     return 0;
 }

@@ -9,7 +9,9 @@ set(solver_lib_files
         counting_valleys.cpp
         cloud_jumping.cpp
         repeated_string.cpp
-        hourglass.cpp hourglass.cpp)
+        hourglass.cpp
+        left_rotation.cpp
+        new_year_chaos.cpp)
 
 add_library(hackerrank_solver STATIC ${solver_lib_files})
 
