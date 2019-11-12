@@ -8,9 +8,11 @@
 #include <utility>
 #include <vector>
 #include <map>
-#include <set>
+
+#define VERBOSE false
 
 using namespace std;
+
 
 // helpers
 vector<string> split_strings(string input, char delimiter);
@@ -158,14 +160,15 @@ public:
         map<int, map<int, int>>::iterator itr;
         map<int, int>:: iterator ptr;
 
-        for(itr=hexMap.begin(); itr!=hexMap.end(); itr++){
-            if (distance(hexMap.begin(), itr) == rowID){
-                for(ptr=itr->second.begin(); ptr!=itr->second.end(); ptr++){
+        for(itr=hexMap.begin(); itr!=hexMap.end(); itr++) {
+            if (distance(hexMap.begin(), itr) == rowID) {
+                for (ptr = itr->second.begin(); ptr != itr->second.end(); ptr++) {
                     output.push_back(ptr->first);
                 }
                 return output;
             }
         }
+        return vector<int>();
     }
 
     vector<int> gridGetNeighbours(int cellID){
@@ -271,7 +274,8 @@ public:
         Node current = start;
         openSet.push_back(current);
 
-        cout << "at: (" << current.point.first << ", " << current.point.second << ")" << endl;
+        if (VERBOSE)
+            cout << "at: (" << current.point.first << ", " << current.point.second << ")" << endl;
 
         // traverse through openSet
         auto os = openSet.begin();
@@ -280,7 +284,9 @@ public:
                 return (x.G + x.H) < (y.G + y.H);
             });
 
-            cout << "at: (" << curr->point.first << ", " << curr->point.second << ")" << endl;
+            if (VERBOSE)
+                cout << "at: (" << curr->point.first << ", " << curr->point.second << ")" << endl;
+
 
             // if it's the Node we want, retrace the path and return it
             if (*curr == dest){
@@ -289,29 +295,39 @@ public:
                     *curr = *curr->parent;
                 }
 
-                path.push_back(*curr);
                 reverse(path.begin(), path.end());
                 return path;
             }
 
             // add to the closed set
-            closeSet.push_back(*curr);
+            Node curr_temp = *curr;
 
-            // loop through the node's children/siblings
-            vector<int> nn = gridGetNeighbours(curr->point.second);
+            // remove the item from the open set
+            openSet.erase(curr);
+
+            // add to close set
+            closeSet.push_back(curr_temp);
+
+            // find neighbours of current node
+            vector<int> nn = gridGetNeighbours(curr_temp.point.second);
             vector<Node> children;
             children.reserve(nn.size());
             for (auto n : nn){
                 children.push_back(grid[n]);
             }
 
+            // loop through the node's children/siblings
             for (auto c : children){
 
                 // if node is already in closeSet, then skip it
                 auto itc = find(closeSet.begin(), closeSet.end(), c);
                 if (itc != closeSet.end()) {
-                    cout << "\ttraversing: (" << itc->point.first << ", " << itc->point.second << ")" << endl;
-                    cout << "\t(" << itc->point.first << ", " << itc->point.second << ") has been visited" << endl;
+
+                    if (VERBOSE) {
+                        cout << "\ttraversing: (" << itc->point.first << ", " << itc->point.second << ")" << endl;
+                        cout << "\t(" << itc->point.first << ", " << itc->point.second << ") has been visited" << endl;
+                    }
+
                     continue;
                 }
 
@@ -320,32 +336,30 @@ public:
                 if (ito != openSet.end())
                 {
                     // check if we can beat the current G-score
-                    int new_G = curr->G + curr->movingCost(*ito);
+                    int new_G = curr_temp.G + curr_temp.movingCost(*ito);
                     if (ito->G > new_G){
                         ito->G = new_G;
 
                         // set the parent to our current item
                         ito->parent = new Node();
-                        *(ito->parent) = *curr;
+                        *(ito->parent) = curr_temp;
                     }
                 } else {
                     // if it's not in openSet as well, calculate G and H score for the node
-                    c.G = curr->G + curr->movingCost(c);
+                    c.G = curr_temp.G + curr_temp.movingCost(c);
                     c.H = Node::calcManhattan(c.point, dest.point);
 
                     // set the parent to our current item
                     c.parent = new Node();
-                    *(c.parent) = *curr;
+                    *(c.parent) = curr_temp;
 
-                    cout << "\ttraversing: (" << c.point.first << ", " << c.point.second << ")" << endl;
+                    if (VERBOSE)
+                        cout << "\ttraversing: (" << c.point.first << ", " << c.point.second << ")" << endl;
 
                     // add it to the set
                     openSet.push_back(c);
                 }
             }
-
-            // remove the item from the open set
-            openSet.erase(curr);
 
             os++;
         }
@@ -384,6 +398,12 @@ int main (int argc, char* argv[]){
     // set the honey location
     grid[h.B-1].value = 100;
     vector<Node> path = h.aStarSearch(grid[h.A-1], grid[h.B-1], grid);
+
+    // report
+    if (path.size() <= h.N)
+        cout << "DONE in " << path.size() << " steps" << endl;
+    else
+        cout << "Fastest path (" << path.size() << ") " << "is longer than allowed steps of " << " (" << h.N << ")" << endl;
 
     return 0;
 }
