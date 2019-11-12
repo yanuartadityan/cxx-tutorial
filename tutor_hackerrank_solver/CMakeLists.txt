@@ -11,7 +11,8 @@ set(solver_lib_files
         repeated_string.cpp
         hourglass.cpp
         left_rotation.cpp
-        new_year_chaos.cpp)
+        new_year_chaos.cpp
+        honeycomb_solver.cpp)
 
 add_library(hackerrank_solver STATIC ${solver_lib_files})
 

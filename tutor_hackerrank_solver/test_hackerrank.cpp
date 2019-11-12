@@ -15,7 +15,8 @@ int main(int argc, char* argv[]){
 //    repeated_string();
 //    hourglass();
 //    left_rotation();
-    new_year_chaos();
+//    new_year_chaos();
+    honeycomb_solver();
 
     return 0;
 }
