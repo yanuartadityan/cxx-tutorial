@@ -3,6 +3,8 @@
 //
 
 #include "challenges.h"
+#include "helper/string_split.h"
+
 #include <iostream>
 #include <vector>
 #include <limits>
@@ -11,7 +13,6 @@
 
 using namespace std;
 
-vector<string> split_string(string);
 int jumpingOnClouds(vector<int>);
 
 void cloud_jumping(void){
@@ -24,7 +25,7 @@ void cloud_jumping(void){
     string clouds;
     getline(cin, clouds);
 
-    vector<string> split_clouds = split_string(clouds);
+    vector<string> split_clouds = string_split(clouds, ' ');
 
     // create container as many as the input cloud
     vector<int> c(n);
@@ -38,39 +39,6 @@ void cloud_jumping(void){
     int result = jumpingOnClouds(c);
 
     cout << result << endl;
-}
-
-vector<string> split_string(string input_str){
-    // removes multiple spaces
-//    string::iterator new_end = unique(input_str.begin(), input_str.end(), [] (const char &x, const char &y){
-//        return x == y and x == ' ';
-//    });
-
-    string::iterator new_end = unique(input_str.begin(), input_str.end());
-
-    // removes trailing unused chars, and preserve only uniques
-    input_str.erase(new_end, input_str.end());
-
-    while (input_str[input_str.length() - 1] == ' ') {
-        input_str.pop_back();
-    }
-
-    vector<string> splits;
-    char delimiter = ' ';
-
-    size_t i = 0;
-    size_t pos = input_str.find(delimiter);
-
-    while (pos != string::npos) {
-        splits.push_back(input_str.substr(i, pos - i));
-
-        i = pos + 1;
-        pos = input_str.find(delimiter, i);
-    }
-
-    splits.push_back(input_str.substr(i, min(pos, input_str.length()) - i + 1));
-
-    return splits;
 }
 
 int jumpingOnClouds(vector<int> cloud_vals){

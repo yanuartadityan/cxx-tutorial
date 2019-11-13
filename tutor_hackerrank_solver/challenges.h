@@ -12,6 +12,5 @@ void repeated_string(void);
 void hourglass(void);
 void left_rotation(void);
 void new_year_chaos(void);
-void honeycomb_solver(void);
 
 #endif //CXX_TUTOR_CHALLENGES_H

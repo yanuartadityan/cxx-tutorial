@@ -11,11 +11,14 @@ set(solver_lib_files
         repeated_string.cpp
         hourglass.cpp
         left_rotation.cpp
-        new_year_chaos.cpp
-        honeycomb_solver.cpp)
+        new_year_chaos.cpp)
+
+add_subdirectory(helper)
 
 add_library(hackerrank_solver STATIC ${solver_lib_files})
 
 add_executable(test_hackerrank test_hackerrank.cpp)
 
-target_link_libraries(test_hackerrank hackerrank_solver)
+target_link_libraries(test_hackerrank
+                      hackerrank_solver
+                      hackerrank_helper)

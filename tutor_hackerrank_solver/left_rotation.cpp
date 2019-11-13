@@ -3,6 +3,8 @@
 //
 
 #include "challenges.h"
+#include "helper/string_split.h"
+
 #include <iostream>
 #include <vector>
 #include <limits>
@@ -23,7 +25,7 @@ void left_rotation(void){
     // get the array
     string temp;
     getline(cin, temp);
-    vector<string> a_temp = split_string(temp);
+    vector<string> a_temp = string_split(temp, ' ');
 
     vector<int> a(n);
 
@@ -42,35 +44,6 @@ void left_rotation(void){
     }
 
     cout << "\n";
-}
-
-vector<string> split_string(string input){
-    string::iterator nEnd = std::unique(input.begin(), input.end(), [](const char &x, const char &y) {
-        return x == y and x == ' ';
-    });
-
-    input.erase(nEnd, input.end());
-
-    while (input[input.length() - 1] == ' ') {
-        input.pop_back();
-    }
-
-    vector<string> splits;
-    char delimiter = ' ';
-
-    size_t i = 0;
-    size_t pos = input.find(delimiter);
-
-    while (pos != string::npos){
-        splits.push_back(input.substr(i, pos - i));
-
-        i = pos + 1;
-        pos = input.find(delimiter, i);
-    }
-
-    splits.push_back(input.substr(i, min(pos, input.length()) - i + 1));
-
-    return splits;
 }
 
 vector<int> rotLeft(vector<int> &a, int &d){
