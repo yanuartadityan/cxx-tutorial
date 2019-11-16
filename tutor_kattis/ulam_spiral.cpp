@@ -1,5 +1,6 @@
 //
 // Created by Mirkwood Ape on 11/16/2019.
+// mailto: yanuart.adityan@gmail.com
 //
 
 #include <iostream>
@@ -27,7 +28,7 @@ public:
 
 private:
     unsigned mx, my;
-    // FIXME put these following vectors to map instead
+    // TODO maybe combine these two in a map<pair<int,int> int>?
     vector<unsigned> arr_prime;
     vector<unsigned> arr_all;
     void order(unsigned);
@@ -122,6 +123,7 @@ pair<int, int> Spiral::find_in_array(unsigned s_at){
 }
 
 vector<pair<int, int>> Spiral::find_neighbor(unsigned s_at) {
+    // TODO might be much faster just to search based on boolean of primes or not?
     // list of adjacent cells (non diagonal) that are not primes
     vector<pair<int, int>> output;
 
@@ -189,21 +191,25 @@ map<pair<int, int>, int> Spiral::bfs(unsigned origin, unsigned dest){
 int main (int argc, char* argv[]){
     // get input
     unsigned x, y;
+
+    // while there's input
+    int case_id = 1;
     while (cin >> x >> y) {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         // build the spiral
         Spiral s;
         s.build(MAX_N, 1);
-        vector<pair<int, int>> temp = s.find_neighbor(20);
 
         // find path
         map<pair<int, int>, int> path = s.bfs(x, y);
 
         if (path[s.find_in_array(y)] == 0 && x != y)
-            cout << "impossible" << endl;
+            cout << "Case " << case_id << ": impossible" << endl;
         else
-            cout << path[s.find_in_array(y)] << endl;
+            cout << "Case " << case_id << ": " << path[s.find_in_array(y)] << endl;
+
+        case_id++;
     }
 
     return 0;
