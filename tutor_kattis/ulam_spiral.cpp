@@ -11,15 +11,15 @@
 #include <map>
 
 // def
-#define MAX_N 100
+#define MAX_N 10000
 
 using namespace std;
 
 // class declaration
 class Spiral {
 public:
-    Spiral ();
-    void build(unsigned, unsigned);
+    Spiral();
+    void build(unsigned);
     static bool isPrime(unsigned u);
     vector<pair<int, int>> find_neighbor(unsigned);
     map<pair<int, int>, int> bfs(unsigned, unsigned);
@@ -29,8 +29,10 @@ public:
 private:
     unsigned mx, my;
     // TODO maybe combine these two in a map<pair<int,int> int>?
-    vector<unsigned> arr_prime;
-    vector<unsigned> arr_all;
+
+    // FIXME see if these really works
+    map<pair<int, int>, int> dict_to_val;
+    vector<pair<int, int>> dict_to_coord{MAX_N, {0, 0}};
     void order(unsigned);
 };
 
@@ -39,24 +41,53 @@ Spiral::Spiral() {
     // constructor
     mx = 0;
     my = 0;
-    arr_prime.clear();
 }
 
-void Spiral::build(unsigned n, unsigned startAt=0){
+void Spiral::build(unsigned s_at=0){
     // build prime spiral
-    mx = n;
-    unsigned area = n * n;
-    my = static_cast<unsigned>(log10(static_cast<long double>(area)))+ 1;
+    int curr_px = 0;
+    int curr_py = 0;
 
-    // build the array of all real numbers's boolean representation of being prime or not
-    // init with zeroes
-    for (unsigned i = 0; i < area; i++) {
-        arr_prime.push_back(0);
-        arr_all.push_back(0);
+    // init
+    dict_to_val[{curr_px, curr_py}] = s_at;
+    dict_to_coord[s_at] = {curr_px, curr_py};
+
+    // update the current element
+    unsigned curr = s_at + 1;
+    int steps = 1;
+
+    while (curr <= MAX_N) {
+        // the spiral starts at coordinate {0, 0}, with the spiral starts
+        // going to the positive x direction first, then follow counter-
+        // clockwise direction
+        for (int i=0; i<4 && curr <= MAX_N; i++){
+            for (int j=0; j<steps && curr <= MAX_N; j++){
+                // first step, going to the right (x+1)
+                if (i==0)
+                    curr_px++;
+                // second step, going upwards (y-1)
+                if (i==1)
+                    curr_py--;
+                // third step, going left (x-1)
+                if (i==2)
+                    curr_px--;
+                // fourth (last) step, going downward (y+1)
+                if (i==3)
+                    curr_py++;
+
+                // after each step, new {x, y} coordinate is obtained
+                // update dictionary maps of the prime maze
+                dict_to_val[{curr_px, curr_py}] = curr;
+                dict_to_coord[curr] = {curr_px, curr_py};
+
+                curr++;
+            }
+
+            // when one complete loop is done, update the step size
+            if (i % 2 == 1)
+                steps++;
+        }
     }
-
-    // build and arrange
-    order(startAt);
 }
 
 bool Spiral::isPrime(unsigned u) {
@@ -64,7 +95,7 @@ bool Spiral::isPrime(unsigned u) {
     if (u < 4) return u > 1;
     if (!(u % 2) || !(u % 3)) return false;
 
-    auto k = static_cast<unsigned>(sqrt(static_cast<long double>( u )));
+    auto k = static_cast<unsigned>(sqrt(static_cast<long double>(u)));
     unsigned c = 5;
     while (c <= k) {
         if (!(u % c) || !(u % (c + 2))) return false;
@@ -75,51 +106,59 @@ bool Spiral::isPrime(unsigned u) {
 }
 
 void Spiral::order(unsigned s_at) {
-    // order/arrange the spiral
-    unsigned step_limit = 1, step_count = 0, n = 1, idx = mx >> 1, idy = idx;
-    int inc_x = 1, inc_y = 0;
+    int curr_px = 0;
+    int curr_py = 0;
 
-    while(idx < mx && idy < mx ) {
-        arr_prime.at(idx + idy * mx ) = isPrime(s_at ) ? s_at : 0;
-        arr_all.at(idx + idy * mx) = s_at;
-        s_at++;
+    // init
+    dict_to_val[{curr_px, curr_py}] = s_at;
+    dict_to_coord[s_at] = {curr_px, curr_py};
 
-        if( inc_x ) {
-            idx += inc_x;
-            if(++step_count == step_limit ) {
-                inc_y = -inc_x;
-                // reset x and step_count
-                inc_x = 0;
-                step_count = 0;
+    // update the current element
+    unsigned curr = s_at + 1;
+    int steps = 1;
+
+    while (curr <= MAX_N) {
+        // the spiral starts at coordinate {0, 0}, with the spiral starts
+        // going to the positive x direction first, then follow counter-
+        // clockwise direction
+        for (int i=0; i<4 && curr <= MAX_N; i++){
+            for (int j=0; j<steps && curr <= MAX_N; j++){
+                // first step, going to the right (x+1)
+                if (i==0)
+                    curr_px++;
+                // second step, going upwards (y-1)
+                if (i==1)
+                    curr_py--;
+                // third step, going left (x-1)
+                if (i==2)
+                    curr_px--;
+                // fourth (last) step, going downward (y+1)
+                if (i==3)
+                    curr_py++;
+
+                // after each step, new {x, y} coordinate is obtained
+                // update dictionary maps of the prime maze
+                dict_to_val[{curr_px, curr_py}] = curr;
+                dict_to_coord[curr] = {curr_px, curr_py};
+
+                curr++;
             }
-        } else {
-            idy += inc_y;
-            if(++step_count == step_limit ) {
-                inc_x = inc_y;
-                // reset y and step_count
-                inc_y = 0;
-                step_count = 0;
-                step_limit++;
-            }
+
+            // when one complete loop is done, update the step size
+            if (i % 2 == 1)
+                steps++;
         }
     }
 }
 
-unsigned Spiral::get_num_from_pos(unsigned pos_x, unsigned pos_y){
+unsigned Spiral::get_num_from_pos(unsigned pos_x, unsigned pos_y) {
     // return the number given coordinates, first get array ID
-    int arr_id = pos_y + pos_x * mx;
-    return arr_all[arr_id];
+    return dict_to_val[{pos_x, pos_y}];
 }
 
-pair<int, int> Spiral::find_in_array(unsigned s_at){
+pair<int, int> Spiral::find_in_array(unsigned s_at) {
     // find the coordinate of the current number
-    auto it = find(arr_all.begin(), arr_all.end(), s_at);
-
-    // get the arr-idx
-    auto arr_idx = distance(arr_all.begin(), it);
-
-    // return the result
-    return make_pair(arr_idx/mx, arr_idx%mx);
+    return dict_to_coord[s_at];
 }
 
 vector<pair<int, int>> Spiral::find_neighbor(unsigned s_at) {
@@ -156,7 +195,6 @@ map<pair<int, int>, int> Spiral::bfs(unsigned origin, unsigned dest){
 
     // find origin coordinate
     pair<int, int> origin_xy = find_in_array(origin);
-    pair<int, int> dest_xy = find_in_array(dest);
 
     // push curr position to queue
     Q.push(origin_xy);
@@ -192,14 +230,22 @@ int main (int argc, char* argv[]){
     // get input
     unsigned x, y;
 
+    // build the spiral
+    Spiral s = *new Spiral();
+    s.build(MAX_N, 1);
+
     // while there's input
     int case_id = 1;
     while (cin >> x >> y) {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        // build the spiral
-        Spiral s;
-        s.build(MAX_N, 1);
+        // FIXME: a bug, have to swap dest/origin when origin is bigger than dest
+        unsigned temp;
+        if (x > y){
+            temp = x;
+            x = y;
+            y = temp;
+        }
 
         // find path
         map<pair<int, int>, int> path = s.bfs(x, y);
