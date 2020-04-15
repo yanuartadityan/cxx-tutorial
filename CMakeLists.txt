@@ -18,3 +18,4 @@ add_subdirectory(tutor_kattis)
 
 # projects
 add_subdirectory(project_mrt)
+add_subdirectory(project_thesis)
