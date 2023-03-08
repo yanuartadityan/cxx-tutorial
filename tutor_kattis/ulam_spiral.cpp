@@ -232,7 +232,7 @@ int main (int argc, char* argv[]){
 
     // build the spiral
     Spiral s = *new Spiral();
-    s.build(MAX_N, 1);
+    s.build(MAX_N);
 
     // while there's input
     int case_id = 1;
