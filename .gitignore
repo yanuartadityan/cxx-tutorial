@@ -1,4 +1,6 @@
-/build
+**/build
 /cmake-build-debug
-.vscode
+**/.vscode/**
 .idea
+xcode
+.DS_Store

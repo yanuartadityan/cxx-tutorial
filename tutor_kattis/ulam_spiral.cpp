@@ -9,6 +9,7 @@
 #include <cmath>
 #include <queue>
 #include <map>
+#include <limits>
 
 // def
 #define MAX_N 10000
