@@ -9,6 +9,7 @@
 #include <cmath>
 #include <queue>
 #include <map>
+#include <limits>
 
 // def
 #define MAX_N 10000
@@ -232,7 +233,7 @@ int main (int argc, char* argv[]){
 
     // build the spiral
     Spiral s = *new Spiral();
-    s.build(1);
+    s.build(MAX_N);
 
     // while there's input
     int case_id = 1;

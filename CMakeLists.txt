@@ -2,7 +2,17 @@ cmake_minimum_required(VERSION 3.10)
 # root-level CMakeLists.txt, all project level initialization
 # e.g. find_package(), include path, etc
 
+# apple setting
+if(APPLE)
+    set(CMAKE_C_COMPILER "/usr/local/bin/gcc-12")
+    set(CMAKE_CXX_COMPILER "/usr/local/bin/g++-12")
+endif()
+
 project(cxx_tutor)
+
+# external submodules
+add_subdirectory(external/fmt)
+add_subdirectory(external/boost EXCLUDE_FROM_ALL)
 
 # tutorials
 add_subdirectory(tutor_utils)
