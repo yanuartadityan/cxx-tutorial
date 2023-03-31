@@ -14,7 +14,7 @@ project(cxx_tutor)
 add_subdirectory(external/fmt)
 add_subdirectory(external/boost EXCLUDE_FROM_ALL)
 
-# put it at the end
+# tutorials
 add_subdirectory(tutor_utils)
 add_subdirectory(tutor_pointer)
 add_subdirectory(tutor_linked_list)
@@ -25,3 +25,7 @@ add_subdirectory(tutor_boost_1)
 add_subdirectory(tutor_strings)
 add_subdirectory(tutor_hackerrank_solver)
 add_subdirectory(tutor_kattis)
+
+# projects
+add_subdirectory(project_mrt)
+add_subdirectory(project_thesis)
