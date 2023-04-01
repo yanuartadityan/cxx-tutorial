@@ -1,8 +1,7 @@
 //
 // Created by Mirkwood Ape on 4/12/2020.
 //
-
-#include "opencv2/opencv.hpp"
+#include <opencv2/opencv.hpp>
 #include "cvhelper.h"
 
 using namespace cv;

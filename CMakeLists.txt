@@ -10,6 +10,9 @@ endif()
 
 project(cxx_tutor)
 
+# packages
+find_package(OpenCV REQUIRED)
+
 # external submodules
 add_subdirectory(external/fmt)
 add_subdirectory(external/boost EXCLUDE_FROM_ALL)

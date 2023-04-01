@@ -6,9 +6,6 @@ project(project_thesis)
 # add compiler flags
 set(CMAKE_CXX_FLAGS "-std=c++11")
 
-# packages
-find_package(OpenCV REQUIRED)
-
 # set
 set(SHARED_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(SHARED_INCLUDE_DIR ${SHARED_INCLUDE_DIR} PARENT_SCOPE)

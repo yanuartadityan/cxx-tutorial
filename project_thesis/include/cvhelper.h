@@ -5,8 +5,6 @@
 #ifndef CXX_TUTOR_CVHELPER_H
 #define CXX_TUTOR_CVHELPER_H
 
-#include "opencv4/opencv2/opencv.hpp"
-
 void getCvVersion();
 
 #endif //CXX_TUTOR_CVHELPER_H
