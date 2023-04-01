@@ -28,6 +28,7 @@ add_subdirectory(tutor_boost_1)
 add_subdirectory(tutor_strings)
 add_subdirectory(tutor_hackerrank_solver)
 add_subdirectory(tutor_kattis)
+add_subdirectory(tutor_opencv)
 
 # projects
 add_subdirectory(project_mrt)
