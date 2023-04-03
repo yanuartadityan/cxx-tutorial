@@ -1,4 +1,5 @@
 **/build
+**/Debug
 /cmake-build-debug
 **/.vscode/**
 .idea

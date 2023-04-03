@@ -11,7 +11,25 @@ endif()
 project(cxx_tutor)
 
 # packages
-find_package(OpenCV REQUIRED)
+if(APPLE)
+    set(OpenCV_DIR /usr/local/Cellar/opencv/4.7.0_2/lib/cmake/opencv4/)
+    find_package(OpenCV HINTS /usr/local/Cellar/opencv/ REQUIRED)
+else()
+    find_package(OpenCV REQUIRED)
+endif()
+
+# global include directories
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+# global link directories
+link_directories(${OpenCV_LINK_DIRS})
+
+# OpenCV status
+message(STATUS "OpenCV library status:")
+message(STATUS " config: ${OpenCV_DIR}")
+message(STATUS " version: ${OpenCV_VERSION}")
+message(STATUS " libraries: ${OpenCV_LIBS}")
+message(STATUS " include path: ${OpenCV_INCLUDE_DIRS}")
 
 # external submodules
 add_subdirectory(external/fmt)
@@ -28,6 +46,7 @@ add_subdirectory(tutor_boost_1)
 add_subdirectory(tutor_strings)
 add_subdirectory(tutor_hackerrank_solver)
 add_subdirectory(tutor_kattis)
+add_subdirectory(tutor_opencv)
 
 # projects
 add_subdirectory(project_mrt)
