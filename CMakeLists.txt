@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.10)
 
 # apple setting
 if(APPLE)
-    set(CMAKE_C_COMPILER "/usr/local/bin/gcc-12")
-    set(CMAKE_CXX_COMPILER "/usr/local/bin/g++-12")
+    set(CMAKE_C_COMPILER "/usr/bin/clang")
+    set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 endif()
 
 project(cxx_tutor)
@@ -18,19 +18,13 @@ else()
     find_package(OpenCV REQUIRED)
 endif()
 
-# global include directories
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-# global link directories
-link_directories(${OpenCV_LINK_DIRS})
-
 # OpenCV status
 message(STATUS "OpenCV library status:")
 message(STATUS " config: ${OpenCV_DIR}")
 message(STATUS " version: ${OpenCV_VERSION}")
 message(STATUS " libraries: ${OpenCV_LIBS}")
 message(STATUS " include path: ${OpenCV_INCLUDE_DIRS}")
-
+message(STATUS " link path: ${OpenCV_LINK_DIRS}")
 # external submodules
 add_subdirectory(external/fmt)
 add_subdirectory(external/boost EXCLUDE_FROM_ALL)
