@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-set -e
+#set -e
 
 # determine OpenCV version
 OPENCV_VERSION='4.7.0'
@@ -7,15 +7,15 @@ CMAKE_BUILDCHAIN='Ninja' # MinGW for msys, Ninja/Unix Makefiles for Unix
 
 # if linux (currently debian-based only, e.g., Ubuntu, Mint, Elementary, PopOS etc)
 # more details here https://gist.github.com/lyndell/8c5ef8ff9eba2098717f
-if [ "$OSTYPE" = "linux-gnu"* ]; then
+if [ $OSTYPE == "linux-gnu" ]; then
     sudo apt-get -y update
     # build system
-    sudo apt-get install -y build-essential cmake
+    sudo apt-get install -y build-essential cmake ninja-build
     # opencv gui
     sudo apt-get install -y qt5-default libvtk6-dev 
     # media i/o
     sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev \ 
-                            libpng-dev libtiff5-dev libjasper-dev \
+                            libpng-dev libtiff5-dev \
                             libopenexr-dev libgdal-dev
     # video i/o
     sudo apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev \
@@ -25,36 +25,36 @@ if [ "$OSTYPE" = "linux-gnu"* ]; then
     # parallellism and linear algebra libraries
     sudo apt-get install -y libtbb-dev libeigen3-dev
     # others
-    sudo apt-get install -y doxygen unzip wget
+    sudo apt-get install -y doxygen
 
 # if macos
-elif [ "$OSTYPE" = "darwin"* ]; then
+elif [ $OSTYPE == "darwin"* ]; then
     # assuming you use homebrew
     brew install cmake ninja doxygen unzip wget eigen
 
 # if windows through msys/mingw
-elif [ "$OSTYPE" = "msys" ]; then
+elif [ $OSTYPE == "msys" ]; then
 
 # if regular windows --> not supported at the moment :)
+	echo "Not supported ..."
 else
     echo "Not supported ..."
 fi
 
 # now download opencv through github
-git clone https://github.com/opencv/opencv.git external/opencv
-git clone https://github.com/opencv/opencv_contrib.git external/opencv_contrib
+#git clone https://github.com/opencv/opencv.git external/opencv
+#git clone https://github.com/opencv/opencv_contrib.git external/opencv_contrib
 
 # start building
 cd external/opencv
 git checkout tags/$OPENCV_VERSION
 mkdir build && cd build
-if [ "$OSTYPE" = "linux-gnu"* ]; then
+if [ $OSTYPE = "linux-gnu" ]; then
     cmake -G$CMAKE_BUILDCHAIN -DENABLE_PRECOMPILED_HEADERS=OFF \
-        -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON \
-        -DWITH_GDAL=ON -DWITH_XINE=ON \
+        -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON \
         -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
         -DCMAKE_BUILD_TYPE=Release ..
-elif [ "$OSTYPE" = "darwin"* ]; then
+elif [ $OSTYPE = "darwin"* ]; then
     cmake -G$CMAKE_BUILDCHAIN -DENABLE_PRECOMPILED_HEADERS=OFF \
         -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
         -DCMAKE_BUILD_TYPE=Release ..
